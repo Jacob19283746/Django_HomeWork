@@ -1,0 +1,8 @@
+django-admin startproject UrbanDjango       # Название файла для создания проекта
+python manage.py runserver                  # Запуск сервера
+python manage.py startapp example1          # Название файла для создания приложения
+python manage.py migrate                    # Инициализация БД в проекте
+python manage.py makemigrations             # Создание миграции
+python manage.py migrate                    # Применяем миграции
+
+https://uguide.ru/tablica-osnovnykh-tegov-html-s-primerami # Основные теги
