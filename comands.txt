@@ -1,8 +1,25 @@
 django-admin startproject UrbanDjango       # Название файла для создания проекта
 python manage.py runserver                  # Запуск сервера
 python manage.py startapp example1          # Название файла для создания приложения
+
 python manage.py migrate                    # Инициализация БД в проекте
 python manage.py makemigrations             # Создание миграции
 python manage.py migrate                    # Применяем миграции
+
+python manage.py shell                      # Консоль для QuerySet запросов
+
+''' Работа с БД '''
+from <название приложения>.models import <название модели>      # Импорт моделей
+<название модели>.objects.all()                                 # Вывести все объекты
+<название модели>.objects.create(<атрибут = значение>)          # Добавление объектов
+<название модели>.objects.filter(<атрибут = значение>)          # Выводит объекты с указанным атрибутом
+<название модели>.objects.filter(<атрибут = значение>)
+.update(<атрибут = новое значение>)                             # Обновляет атрибут объекта
+<название модели>.objects.count()                               # Выводит кол-во объектов
+<название модели>.objects.get(id=<значение>)                    # Вытаскивает объект
+<название модели>.objects.delete(id=<значение>)                 # Удаляет объект
+<название модели>.objects.get(id=1).<название другой модели>
+.set((<первый покупатель>, <второй покупатель>))                # Присваивание к таблице
+
 
 https://uguide.ru/tablica-osnovnykh-tegov-html-s-primerami # Основные теги
