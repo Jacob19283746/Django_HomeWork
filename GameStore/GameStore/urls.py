@@ -23,5 +23,5 @@ urlpatterns = [
     path('platform/cart/', cart),
     path('platform/', platform),
     path('platform/store/', store),
-    path('platform/djangoreg/', sign_up_by_django),
+    path('platform/log_in/', sign_up_by_django),
 ]

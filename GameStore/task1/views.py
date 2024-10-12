@@ -32,30 +32,6 @@ def sign_up_by_django(request):
 
     return render(request, 'registration_page.html', info)
 
-# def sign_up_by_html(request):
-#     info ={}
-#     if request.method == 'POST':
-#         username = request.POST.get('username')
-#         password = request.POST.get('password')
-#         repeat_password = request.POST.get('repeat_password')
-#         age = request.POST.get('age')
-#         try:
-#             age = int(age)
-#             if password != repeat_password:
-#                 info['error'] = 'Пароли не совпадают'
-#             elif age < 18:
-#                 info['error'] = 'Вы должны быть старше 18'
-#             elif username in users:
-#                 info['error'] = 'Пользователь уже существует'
-#             else:
-#                 return HttpResponse(f'Приветствуем, {username}!')
-#         except ValueError:
-#             info['error'] = 'Введите корректный возраст'
-#     form = UserRegister()
-#     info['form'] = form
-#     return render(request, 'registration_page.html', info)
-
-
 
 def store(request):
     Games = Game.objects.all()
