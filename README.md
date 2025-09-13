@@ -122,17 +122,19 @@ GameStore - это веб-приложение для продажи видео�
 ## ��️ Структура проекта
 
 ```
-GameStore/
-├── GameStore/                 # Основные настройки Django
-│   ├── settings.py           # Конфигурация проекта
+Django_HomeWork/
+├── GameStore/               # Основные настройки Django
+│   ├── settings.py          # Конфигурация проекта
 │   ├── urls.py              # Главные URL-маршруты
 │   └── wsgi.py              # WSGI конфигурация
-├── task1/                    # Основное приложение
+|
+├── task1/                   # Основное приложение
 │   ├── models.py            # Модели данных
 │   ├── views.py             # Представления
 │   ├── forms.py             # Формы
 │   ├── admin.py             # Админ-панель
 │   └── migrations/          # Миграции БД
+|
 ├── templates/               # HTML шаблоны
 │   └── one_tasks/
 │       ├── menu.html        # Базовый шаблон
@@ -141,11 +143,12 @@ GameStore/
 │       ├── game_detail.html # Детали игры
 │       ├── cart.html        # Корзина
 │       └── registration_page.html # Регистрация
+|
 ├── static/                  # Статические файлы
-├── db.sqlite3              # База данных
-├── manage.py               # Управление Django
-├── requirements.txt        # Зависимости
-└── README.md              # Документация
+├── db.sqlite3               # База данных
+├── manage.py                # Управление Django
+├── requirements.txt         # Зависимости
+└── README.md                # Документация
 ```
 
 ## 🔧 Технические детали
