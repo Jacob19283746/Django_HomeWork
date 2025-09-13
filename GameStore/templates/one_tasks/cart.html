@@ -1,14 +1,184 @@
 {% extends 'menu.html' %}
 
-{% block title %}Корзина{% endblock %}
+{% block title %}Корзина - GameStore{% endblock %}
 
 {% block pagename %}
-    <h1>Корзина</h1>
+    <h1>🛍️ Корзина</h1>
 {% endblock %}
 
 {% block content %}
-    <h3>Корзина пуста</h3>
+    <style>
+        .cart-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .cart-item {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+        
+        .cart-item:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+        }
+        
+        .item-info {
+            flex: 1;
+        }
+        
+        .item-title {
+            font-size: 1.3em;
+            font-weight: bold;
+            color: #2d3748;
+            margin-bottom: 5px;
+        }
+        
+        .item-details {
+            color: #718096;
+            font-size: 0.9em;
+        }
+        
+        .item-price {
+            font-size: 1.2em;
+            font-weight: bold;
+            color: #38a169;
+            margin: 0 20px;
+        }
+        
+        .btn {
+            background: linear-gradient(45deg, #e53e3e, #fc8181);
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        .btn-primary {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+        }
+        
+        .btn-success {
+            background: linear-gradient(45deg, #38a169, #48bb78);
+        }
+        
+        .btn-warning {
+            background: linear-gradient(45deg, #d69e2e, #f6e05e);
+        }
+        
+        .cart-summary {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            border-radius: 15px;
+            padding: 25px;
+            margin-top: 20px;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .total-price {
+            font-size: 2em;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+        
+        .balance-info {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .empty-cart {
+            text-align: center;
+            padding: 60px 20px;
+            color: #718096;
+        }
+        
+        .empty-cart h3 {
+            font-size: 1.5em;
+            margin-bottom: 10px;
+        }
+        
+        .cart-actions {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+    </style>
+    
+    <div class="cart-container">
+        {% if cart.games.all %}
+            {% for game in cart.games.all %}
+                <div class="cart-item">
+                    <div class="item-info">
+                        <div class="item-title">🎮 {{ game.title }}</div>
+                        <div class="item-details">
+                            {{ game.genre }} • {{ game.developer }} • {{ game.size }} ГБ
+                        </div>
+                    </div>
+                    <div class="item-price">💰 {{ game.cost }} ₽</div>
+                    <form method="post" style="display: inline;">
+                        {% csrf_token %}
+                        <input type="hidden" name="action" value="remove">
+                        <input type="hidden" name="game_id" value="{{ game.id }}">
+                        <button type="submit" class="btn">🗑️ Удалить</button>
+                    </form>
+                </div>
+            {% endfor %}
+            
+            <div class="cart-summary">
+                <div class="balance-info">
+                    <strong>Ваш баланс:</strong> 💰 {{ buyer.balance }} ₽
+                </div>
+                
+                <div class="total-price">
+                    Итого: 💰 {{ total_cost }} ₽
+                </div>
+                
+                <div class="cart-actions">
+                    <form method="post" style="display: inline;">
+                        {% csrf_token %}
+                        <input type="hidden" name="action" value="purchase">
+                        <button type="submit" class="btn btn-success">💳 Купить все</button>
+                    </form>
+                    
+                    <form method="post" style="display: inline;">
+                        {% csrf_token %}
+                        <input type="hidden" name="action" value="clear">
+                        <button type="submit" class="btn btn-warning">🧹 Очистить корзину</button>
+                    </form>
+                    
+                    <a href="{% url 'store' %}" class="btn btn-primary">🛒 Продолжить покупки</a>
+                </div>
+            </div>
+        {% else %}
+            <div class="empty-cart">
+                <h3>🛒 Корзина пуста</h3>
+                <p>Добавьте игры из магазина, чтобы они появились здесь.</p>
+                <div style="margin-top: 20px;">
+                    <a href="{% url 'store' %}" class="btn btn-primary">🛒 Перейти в магазин</a>
+                </div>
+            </div>
+        {% endif %}
+    </div>
 {% endblock %}
-
-
-
